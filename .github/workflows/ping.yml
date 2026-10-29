@@ -1,0 +1,14 @@
+name: Manter a Central acordada
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Acessar o site
+        run: curl -fsS -o /dev/null -w "HTTP %{http_code} em %{time_total}s\n" --max-time 90 --retry 2 https://central-foco2mais.onrender.com/
